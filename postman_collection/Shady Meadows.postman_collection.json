@@ -1,0 +1,3106 @@
+{
+	"info": {
+		"_postman_id": "dc2e0673-e9d6-4ae5-96cc-ed75acfa7594",
+		"name": "Shady Meadows",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41585491"
+	},
+	"item": [
+		{
+			"name": "Home Page",
+			"item": [
+				{
+					"name": "Branding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate that Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that Response time is under 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"  type: \"object\",\r",
+									"  properties: {\r",
+									"    name: { type: \"string\" },\r",
+									"    map: {\r",
+									"      type: \"object\",\r",
+									"      properties: {\r",
+									"        latitude: { type: \"number\" },\r",
+									"        longitude: { type: \"number\" }\r",
+									"      }\r",
+									"    },\r",
+									"    logoUrl: { type: \"string\" },\r",
+									"    description: { type: \"string\" },\r",
+									"    directions: { type: \"string\" },\r",
+									"    contact: {\r",
+									"      type: \"object\",\r",
+									"      properties: {\r",
+									"        name: { type: \"string\" },\r",
+									"        phone: { type: \"string\" },\r",
+									"        email: { type: \"string\" }\r",
+									"      }\r",
+									"    },\r",
+									"    address: {\r",
+									"      type: \"object\",\r",
+									"      properties: {\r",
+									"        line1: { type: \"string\" },\r",
+									"        line2: { type: \"string\" },\r",
+									"        postTown: { type: \"string\" },\r",
+									"        county: { type: \"string\" },\r",
+									"        postCode: { type: \"string\" }\r",
+									"      }\r",
+									"    }\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate that API response structure matches the contract\", function () {\r",
+									"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that API response contains correct data\", function () {\r",
+									"  let jsonData = pm.response.json();\r",
+									"\r",
+									"  pm.expect(jsonData.name).to.eql(\"Shady Meadows B&B\");\r",
+									"  pm.expect(jsonData.map.latitude).to.eql(52.6351204);\r",
+									"  pm.expect(jsonData.map.longitude).to.eql(1.2733774);\r",
+									"  pm.expect(jsonData.logoUrl).to.eql(\"/images/rbp-logo.jpg\");\r",
+									"  pm.expect(jsonData.description).to.include(\"Welcome to Shady Meadows\");\r",
+									"  pm.expect(jsonData.directions).to.include(\"A place so beautiful you will never want to leave.\");\r",
+									"  pm.expect(jsonData.contact).to.deep.include({\r",
+									"    name: \"Shady Meadows B&B\",\r",
+									"    phone: \"012345678901\",\r",
+									"    email: \"fake@fakeemail.com\"\r",
+									"  });\r",
+									"  pm.expect(jsonData.address).to.deep.include({\r",
+									"    line1: \"Shady Meadows B&B\",\r",
+									"    line2: \"Shadows valley\",\r",
+									"    postTown: \"Newingtonfordburyshire\",\r",
+									"    county: \"Dilbery\",\r",
+									"    postCode: \"N1 1AA\"\r",
+									"  });\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automationintesting.online/api/branding",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"branding"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong Http Method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 405 Method Not Allowed\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body may be empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.be.undefined;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=Gvmr8HYF8jE6YmgS"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/branding",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"branding"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=Gvmr8HYF8jE6YmgS' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomName\":\"107\",\"type\":\"Suite\",\"accessible\":true,\"description\":\"Please enter a description for this room\",\"image\":\"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\"roomPrice\":\"700\",\"features\":[\"WiFi\",\"TV\",\"Radio\",\"Refreshments\",\"Safe\",\"Views\"]}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Room",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that Response time is under 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"  type: \"object\",\r",
+									"  required: [\"rooms\"],\r",
+									"  properties: {\r",
+									"    rooms: {\r",
+									"      type: \"array\",\r",
+									"      items: {\r",
+									"        type: \"object\",\r",
+									"        required: [\r",
+									"          \"roomid\",\r",
+									"          \"roomName\",\r",
+									"          \"type\",\r",
+									"          \"accessible\",\r",
+									"          \"image\",\r",
+									"          \"description\",\r",
+									"          \"features\",\r",
+									"          \"roomPrice\"\r",
+									"        ],\r",
+									"        properties: {\r",
+									"          roomid: { type: \"number\" },\r",
+									"          roomName: { type: \"string\" },\r",
+									"          type: { type: \"string\" },\r",
+									"          accessible: { type: \"boolean\" },\r",
+									"          image: { type: \"string\" },\r",
+									"          description: { type: \"string\" },\r",
+									"          features: {\r",
+									"            type: \"array\",\r",
+									"            items: { type: \"string\" },\r",
+									"            minItems: 1\r",
+									"          },\r",
+									"          roomPrice: { type: \"number\", minimum: 1 }\r",
+									"        }\r",
+									"      }\r",
+									"    }\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response body matches expected rooms schema\", function () {\r",
+									"  pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/room",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid data in Send Us Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Shady Meadows B&B\",\"email\":\"dsaaaaaaaaaaaaa@asdas\",\"phone\":\"12345678910\",\"subject\":\"ssaaaaas\",\"description\":\"yhfsddddddsadddddddddddddddddddd\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/message",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"name\":\"Shady Meadows B&B\",\"email\":\"dsaaaaaaaaaaaaa@asdas\",\"phone\":\"12345678910\",\"subject\":\"ssaaaaas\",\"description\":\"yhfsddddddsadddddddddddddddddddd\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid data in Send Us Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"\",\"email\":\"\",\"phone\":\"\",\"subject\":\"\",\"description\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/message",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"name\":\"\",\"email\":\"\",\"phone\":\"\",\"subject\":\"\",\"description\":\"\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Message (invalid email format&phone)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Mohamed Salah\",\"email\":\"2\",\"phone\":\"2345678900987654323456789098765433456789098765\",\"subject\":\"Triple Room\",\"description\":\"fdsaWZsexrdctfvygbuhnijhbgvfcdxszawqewsxrdctfvgbhnjmhgvfcdxszawesxrdcfvghjnmk\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/message",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"name\":\"Mohamed Salah\",\"email\":\"2\",\"phone\":\"2345678900987654323456789098765433456789098765\",\"subject\":\"Triple Room\",\"description\":\"fdsaWZsexrdctfvygbuhnijhbgvfcdxszawqewsxrdctfvgbhnjmhgvfcdxszawesxrdcfvghjnmk\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "room checkin(valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    jsonData = {};\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"  type: \"object\",\r",
+									"  properties: {\r",
+									"    rooms: {\r",
+									"      type: \"array\",\r",
+									"      items: {\r",
+									"        type: \"object\",\r",
+									"        properties: {\r",
+									"          roomid: { type: \"number\" },\r",
+									"          roomName: { type: \"string\" },\r",
+									"          type: { type: \"string\" },\r",
+									"          accessible: { type: \"boolean\" },\r",
+									"          image: { type: \"string\" },\r",
+									"          description: { type: \"string\" },\r",
+									"          features: { type: \"array\", items: { type: \"string\" } },\r",
+									"          roomPrice: { type: \"number\" }\r",
+									"        },\r",
+									"        required: [\"roomid\",\"roomName\",\"type\",\"accessible\",\"image\",\"description\",\"features\",\"roomPrice\"]\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  required: [\"rooms\"]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response matches room schema\", function () {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/room?checkin=2025-08-30&checkout=2025-08-31",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room"
+							],
+							"query": [
+								{
+									"key": "checkin",
+									"value": "2025-08-30"
+								},
+								{
+									"key": "checkout",
+									"value": "2025-08-31"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room?checkin=2025-08-28&checkout=2025-08-29' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "room checkin(invalid)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/room?checkin=2025-08-28&checkout=2025-08-29",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room"
+							],
+							"query": [
+								{
+									"key": "checkin",
+									"value": "2025-08-28"
+								},
+								{
+									"key": "checkout",
+									"value": "2025-08-29"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room?checkin=2025-08-28&checkout=2025-08-29' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Admin_Token\", pm.response.json().token);\r",
+									"pm.test(\"Status code is 200 for valid login\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains token\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"token\");\r",
+									"    pm.expect(jsonData.token).to.be.a(\"string\").and.not.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"admin\",\"password\":\"password\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/auth/login",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate(valid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=PLVPVxUUmpk3RNWo"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"token\":\"PLVPVxUUmpk3RNWo\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/auth/validate",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"auth",
+								"validate"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/auth/validate' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=PLVPVxUUmpk3RNWo' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"token\":\"PLVPVxUUmpk3RNWo\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login (invalid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"\",\"password\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/auth/login' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"username\":\"\",\"password\":\"\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "room",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    jsonData = {};\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"  type: \"object\",\r",
+									"  required: [\"rooms\"],\r",
+									"  properties: {\r",
+									"    rooms: {\r",
+									"      type: \"array\",\r",
+									"      items: {\r",
+									"        type: \"object\",\r",
+									"        required: [\"roomid\", \"roomName\", \"type\", \"accessible\", \"roomPrice\"],\r",
+									"        properties: {\r",
+									"          roomid: { type: \"integer\" },\r",
+									"          roomName: { type: \"string\" },\r",
+									"          type: { type: \"string\" },\r",
+									"          accessible: { type: \"boolean\" },\r",
+									"          roomPrice: { type: \"number\" }\r",
+									"        }\r",
+									"      }\r",
+									"    }\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Schema is correct\", function () {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/room",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=kzaJ5yrsHosNDEkc' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    jsonData = {};\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"  type: \"object\",\r",
+									"  required: [\"count\"],\r",
+									"  properties: {\r",
+									"    count: { type: \"number\", minimum: 0 }\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Schema is correct\", function () {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Count is a non-negative number\", function () {\r",
+									"    pm.expect(jsonData.count).to.be.at.least(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<1500ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/message/count",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"message",
+								"count"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message/count' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'cache-control: no-cache' \\\r\n  -b 'token=kzaJ5yrsHosNDEkc' \\\r\n  -H 'pragma: no-cache' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "room(valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    jsonData = {};\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200 (room created)\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has success:true\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"success\", true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomName\":\"101\",\"type\":\"Single\",\"accessible\":false,\"description\":\"Please enter a description for this room\",\"image\":\"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\"roomPrice\":\"700\",\"features\":[\"WiFi\",\"TV\",\"Radio\",\"Refreshments\",\"Safe\",\"Views\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/room",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=YYk2Zkz41p4Fkz9f' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "room invalid/expired token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData;\r",
+									"try {\r",
+									"    jsonData = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    jsonData = {};\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200 (room created)\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has success:true\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"success\", true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomName\":\"101\",\"type\":\"Single\",\"accessible\":false,\"description\":\"Please enter a description for this room\",\"image\":\"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\"roomPrice\":\"700\",\"features\":[\"WiFi\",\"TV\",\"Radio\",\"Refreshments\",\"Safe\",\"Views\"]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/room",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=YYk2Zkz41p4Fkz9f' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "room(inValid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=v40E3XQJLDuCwN00"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomName\":\"\",\"type\":\"Single\",\"accessible\":false,\"description\":\"Please enter a description for this room\",\"image\":\"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\"roomPrice\":\"\",\"features\":[]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/room",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=v40E3XQJLDuCwN00' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomName\":\"\",\"type\":\"Single\",\"accessible\":false,\"description\":\"Please enter a description for this room\",\"image\":\"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\"roomPrice\":\"\",\"features\":[]}'"
+					},
+					"response": []
+				},
+				{
+					"name": "booking",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/1"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/booking?roomid=1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "roomid",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/booking?roomid=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=SqW3uA5GNHYGTI24' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/1' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "booking invalid/expired token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/1"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/booking?roomid=1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "roomid",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/booking?roomid=1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=SqW3uA5GNHYGTI24' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/1' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete reservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Status code is 200 or 204 on successful delete\", function () {\r",
+									"    pm.expect([200, 204]).to.include(pm.response.code);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    pm.test(\"Response has success = true\", function () {\r",
+									"        pm.expect(jsonData).to.have.property(\"success\", true);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/room/3",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/1' \\\r\n  -X 'DELETE' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=SqW3uA5GNHYGTI24' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete reservation invalid/expired token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Status code is 200 or 204 on successful delete\", function () {\r",
+									"    pm.expect([200, 204]).to.include(pm.response.code);\r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"    pm.test(\"Response has success = true\", function () {\r",
+									"        pm.expect(jsonData).to.have.property(\"success\", true);\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/rooms"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{Base_URL}}/room/3",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/1' \\\r\n  -X 'DELETE' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=SqW3uA5GNHYGTI24' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/rooms' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update price(valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 for successful room update\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has success = true\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"success\", true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/3"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"700\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/room/3",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/3' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/3' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"700\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update field with invalid/expired token",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/3"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=ExKyZ5dyWGOXKOxI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"700\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/room/3",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/3' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/3' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"700\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update price (invalid)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/3"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=ExKyZ5dyWGOXKOxI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"10000\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/room/3",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/3' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/3' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":true,\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"10000\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update field other than price",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200 for valid update\", function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response indicates success\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"success\");\r",
+									"    pm.expect(jsonData.success).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is acceptable (<2000ms)\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/room/3"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{Admin_Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":\"false\",\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"500\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/room/3",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"room",
+								"3"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/3' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/room/3' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":3,\"roomName\":\"103\",\"type\":\"Suite\",\"accessible\":\"false\",\"image\":\"/images/room3.jpg\",\"description\":\"Etiam metus metus, fringilla ac sagittis id, consequat vel neque. Nunc commodo quis nisl nec posuere. Etiam at accumsan ex. \",\"features\":[\"WiFi\",\"Radio\",\"Safe\"],\"roomPrice\":\"10000\",\"featuresObject\":{\"WiFi\":true,\"TV\":false,\"Radio\":true,\"Refreshments\":false,\"Safe\":true,\"Views\":false}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "message",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/message"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=ExKyZ5dyWGOXKOxI"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/message",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/message' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "message invalid id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/message"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=ExKyZ5dyWGOXKOxI"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/message",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=ExKyZ5dyWGOXKOxI' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/message' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-length",
+								"value": "0"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/message"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=VApM1zRD2mXiq2If"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/message/1/read",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message",
+								"1",
+								"read"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message/1/read' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-length: 0' \\\r\n  -b 'token=VApM1zRD2mXiq2If' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/message' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "read Invalid/expired token",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-length",
+								"value": "0"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/message"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=VApM1zRD2mXiq2If"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/message/1/read",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message",
+								"1",
+								"read"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message/1/read' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-length: 0' \\\r\n  -b 'token=VApM1zRD2mXiq2If' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/message' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete message",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/admin/message"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "token=VApM1zRD2mXiq2If"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/message/1",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"message",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/message/1' \\\r\n  -X 'DELETE' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -b 'token=VApM1zRD2mXiq2If' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/admin/message' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "room id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/room/1",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "room id (invalid)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/api/room/1",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"room",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/room/1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "booking(valid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":1,\"firstname\":\"mohamed\",\"lastname\":\"salah\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"dsaaaaaaaaaaaaa@asdas\",\"phone\":\"12345678910\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/booking",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"booking"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/booking' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":1,\"firstname\":\"mohamed\",\"lastname\":\"salah\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"dsaaaaaaaaaaaaa@asdas\",\"phone\":\"12345678910\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "booking(invalid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":1,\"firstname\":\"\",\"lastname\":\"\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"\",\"phone\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/booking",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"booking"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/booking' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":1,\"firstname\":\"\",\"lastname\":\"\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"\",\"phone\":\"\"}'"
+					},
+					"response": []
+				},
+				{
+					"name": "booking (invalid email format)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://automationintesting.online"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"roomid\":1,\"firstname\":\"mohamed\",\"lastname\":\"salah\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"2\",\"phone\":\"2\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/api/booking",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"api",
+								"booking"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://automationintesting.online/api/booking' \\\r\n  -H 'accept: */*' \\\r\n  -H 'accept-language: en-US,en;q=0.9' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://automationintesting.online' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://automationintesting.online/reservation/1?checkin=2025-08-29&checkout=2025-08-30' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"roomid\":1,\"firstname\":\"mohamed\",\"lastname\":\"salah\",\"depositpaid\":false,\"bookingdates\":{\"checkin\":\"2025-08-29\",\"checkout\":\"2025-08-30\"},\"email\":\"2\",\"phone\":\"2\"}'"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Base_URL",
+			"value": "https://automationintesting.online/api"
+		},
+		{
+			"key": "Admin_Token",
+			"value": "",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			}
+		}
+	]
+}
