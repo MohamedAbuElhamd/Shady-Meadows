@@ -110,5 +110,4 @@ The backend should return a *400 error* for invalid date ranges.
 - Missing backend validation & missing frontend validation
 
 ## 📸 Attachment
-- [![BR_1 Attachment]( https://drive.google.com/file/d/1tPRZE2iQAZSnBBcCdu_cmJBfPsiTwiM7/view?usp=sharing)
-- [📹 BR_1 Attachment](https://drive.google.com/file/d/1v2XArnIvOSi_eUkAU_2Hzc1Ozy23qhuu/view?usp=sharing)
+- [![BR_1 Attachment]((bug_reports/attachments/BR_1.gif))
