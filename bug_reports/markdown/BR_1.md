@@ -1,9 +1,8 @@
 ---
-name: 🐞 Bug Report
-about: Report a reproducible bug or unexpected behavior
-title: "[Bug][FE][BE]: Invalid older check-out dates accepted"
-labels: bug
-assignees: ''
+Name: 🐞 Bug Report
+About: Report a reproducible bug or unexpected behavior
+Title: "[Bug][FE][BE]: Invalid older check-out dates accepted"
+Labels: bug
 ---
 
 ## 📝 Description
@@ -22,19 +21,19 @@ The Check-out field on the Shady Meadows website accepts older dates without sho
 
 ## 📨 Request & Response
 
-*Request:*  
+**Request:**  
 
 ```http
 GET https://automationintesting.online/api/room?checkin=2025-08-28&checkout=2025-08-29 
 ```
 
-*Path Parameters:* N/A
+**Path Parameters:** N/A
 
-*Query Parameters:*
+**Query Parameters:**
 
 - checkin=2025-08-28 && checkout=2025-08-29
 
-*Request Body:* N/A
+**Request Body:** N/A
 
 ---
 
@@ -42,7 +41,7 @@ GET https://automationintesting.online/api/room?checkin=2025-08-28&checkout=2025
 The Check-out field should only allow valid future dates in the correct format.  
 The backend should return a *400 error* for invalid date ranges.
 
-*Expected Response:*
+**Expected Response:**
 - Status Code: 400
 - Response Body: 
 ```json
@@ -59,7 +58,7 @@ The backend should return a *400 error* for invalid date ranges.
 - The Check-out field accepts older invalid values.  
 - Backend returns *status 200* with room information instead of an error.
 
-*Actual Response:*
+**Actual Response:**
 - Status Code: 200
 - Response Body: 
 ```json
@@ -102,13 +101,13 @@ The backend should return a *400 error* for invalid date ranges.
 ---
 
 ## ⚠ Severity
-Low
+- Low
 
 ## ⏫ Priority
-Medium
+- Medium
 
 ## 🔍 Root Cause
-Missing backend validation & missing frontend validation
+- Missing backend validation & missing frontend validation
 
 ## 📸 Attachment
-[![Attachment Video](bug-reports/videos/BR_1.png)](https://drive.google.com/file/d/1v2XArnIvOSi_eUkAU_2Hzc1Ozy23qhuu/view?usp=sharing)
+[[BR_1 Attachment](bug-reports/videos/BR_1.png)](https://drive.google.com/file/d/1v2XArnIvOSi_eUkAU_2Hzc1Ozy23qhuu/view?usp=sharing)
