@@ -111,4 +111,4 @@ The backend should return a *400 error* for invalid date ranges.
 
 ## 📸 Attachment
 - ![BR_1 Attachment](attachments/BR_1.gif)
-- [📹 BR_1 Attachment](https://drive.google.com/file/d/1v2XArnIvOSi_eUkAU_2Hzc1Ozy23qhuu/view?usp=sharing)
+- [📹 Attachment Drive Link](https://drive.google.com/file/d/1v2XArnIvOSi_eUkAU_2Hzc1Ozy23qhuu/view?usp=sharing)
